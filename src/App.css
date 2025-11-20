@@ -1,0 +1,73 @@
+@import "tailwindcss";
+
+* {
+  padding: 0px;
+  margin: 0px;
+}
+body {
+  font-family: "Times New Roman", Times, serif;
+  font-size: 16px;
+  width: 100% !important;
+  padding: 10px;
+  min-width: auto !important;
+  min-height: auto !important;
+}
+#root {
+  width: 100%;
+}
+.toglebtn {
+  margin: 10px 0px;
+  padding: 0px;
+}
+.buttondiv button:nth-child(2) {
+  margin-left: 20px;
+}
+input {
+  padding: 5px 10px;
+}
+table tr th,
+table tr td {
+  text-align: left !important;
+  padding: 4px 10px;
+  border: 1px solid gray;
+}
+button {
+  font-size: 14px;
+  font-weight: 500;
+  padding: 7px;
+}
+form {
+  padding: 10px;
+}
+.form_footer {
+  padding: 10px;
+  margin: 5px 0px;
+  border-top: 1px solid #cdd1d8;
+}
+label,
+p {
+  font-size: 13px;
+  font-weight: 400;
+  overflow-x: auto;
+}
+input,
+textarea {
+  font-size: 12px;
+  font-weight: 400;
+  padding: 10px 7px !important;
+}
+.cartl {
+  border: 1px solid #cdd1d8;
+  box-shadow: 4px 4px 4px #fff;
+}
+.cart-body {
+  padding: 10px;
+}
+.cart-header {
+  padding: 10px;
+  margin: 5px 0px;
+  border-bottom: 1px solid #cdd1d8;
+}
+.Searchbar {
+  width: 300px;
+}
