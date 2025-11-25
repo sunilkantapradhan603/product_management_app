@@ -30,7 +30,7 @@ const ProductPage = () => {
       <Header onClick={handleAddProduct} />
 
       {show && (
-        <div className="fixed inset-0 bg-black/50 flex justify-center items-center z-50">
+        <div className="fixed inset-0 my bg-black/50 flex justify-center items-center z-50">
           <div className="bg-white rounded-xl shadow-lg w-[90%] max-w-md p-6">
             {state.id ? (
               <form onSubmit={handleSubmit}>
