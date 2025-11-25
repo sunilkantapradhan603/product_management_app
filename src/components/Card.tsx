@@ -17,15 +17,22 @@ interface CardProps {
 }
 
 const Card: React.FC<CardProps> = ({ productlist, onEdit, onDelete }) => {
-  const rowsPerPage = 12;
+  const [active, setActive] = useState<string>("");
+  const rowsPerPage = 4;
   const [currentPage, setCurrentPage] = useState(1);
 
   const totalPages = Math.ceil(productlist.length / rowsPerPage);
   const startIndex = (currentPage - 1) * rowsPerPage;
   const currentCards = productlist.slice(startIndex, startIndex + rowsPerPage);
 
-  const handlePrev = () => setCurrentPage((p) => Math.max(p - 1, 1));
-  const handleNext = () => setCurrentPage((p) => Math.min(p + 1, totalPages));
+  const handlePrev = () => {
+    setActive("prev");
+    setCurrentPage((p) => Math.max(p - 1, 1));
+  };
+  const handleNext = () => {
+    setActive("next");
+    setCurrentPage((p) => Math.min(p + 1, totalPages));
+  };
 
   return (
     <div>
@@ -87,14 +94,25 @@ const Card: React.FC<CardProps> = ({ productlist, onEdit, onDelete }) => {
             ))}
           </div>
 
-          {/* ---------- Pagination Footer ---------- */}
           {totalPages > 1 && (
-            <div className="flex justify-center items-center gap-4 mt-4">
-              <Button type="button" value="Prev" onClick={handlePrev} />
+            <div className=" Pagination Pagination flex justify-center items-center gap-4 mt-4">
+              <Button
+                type="button"
+                value="Prev"
+                bg={active === "prev" ? "#1A73E8" : "#eff0f1"}
+                color={active === "prev" ? "#fff" : "#000"}
+                onClick={handlePrev}
+              />
               <span>
                 Page {currentPage} of {totalPages}
               </span>
-              <Button type="button" value="Next" onClick={handleNext} />
+              <Button
+                type="button"
+                value="Next"
+                bg={active === "next" ? "#1A73E8" : "#eff0f1"}
+                color={active === "next" ? "#fff" : "#000"}
+                onClick={handleNext}
+              />
             </div>
           )}
         </>

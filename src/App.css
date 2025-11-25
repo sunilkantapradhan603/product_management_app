@@ -29,7 +29,6 @@ table tr th,
 table tr td {
   text-align: left !important;
   padding: 4px 10px;
-  border: 1px solid gray;
 }
 button {
   font-size: 14px;
@@ -58,7 +57,7 @@ textarea {
 }
 .cartl {
   border: 1px solid #cdd1d8;
-  box-shadow: 4px 4px 4px #fff;
+  box-shadow: 4px 4px 4px 4px #ddd7d7;
 }
 .cart-body {
   padding: 10px;
@@ -70,4 +69,7 @@ textarea {
 }
 .Searchbar {
   width: 300px;
+}
+.Pagination {
+  margin-top: 20px;
 }

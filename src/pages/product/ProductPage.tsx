@@ -29,7 +29,6 @@ const ProductPage = () => {
     <div>
       <Header onClick={handleAddProduct} />
 
-      {/* ---------- Modal ---------- */}
       {show && (
         <div className="fixed inset-0 bg-black/50 flex justify-center items-center z-50">
           <div className="bg-white rounded-xl shadow-lg w-[90%] max-w-md p-6">
@@ -190,14 +189,14 @@ const ProductPage = () => {
           <Button
             type="button"
             value="Grid View"
-            bg={view === "grid" ? "#1A73E8" : "#fff"}
+            bg={view === "grid" ? "#1A73E8" : "#eff0f1"}
             color={view === "grid" ? "#fff" : "#000"}
             onClick={handleGridView}
           />
           <Button
             type="button"
             value="Table View"
-            bg={view === "table" ? "#1A73E8" : "#fff"}
+            bg={view === "table" ? "#1A73E8" : "#eff0f1"}
             color={view === "table" ? "#fff" : "#000"}
             onClick={handleTableView}
           />
