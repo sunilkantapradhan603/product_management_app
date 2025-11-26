@@ -2,18 +2,21 @@ import { useState } from "react";
 import Button from "./Button";
 
 interface ProductListProps {
-  id: string;
+  id: number;
   name: string;
   price: string;
   category: string;
   stock: string;
   description: string;
+  createdAt?: string;
+  isActive?: boolean;
+  tags?: string[];
 }
 
 interface CardProps {
   productlist: ProductListProps[];
-  onEdit: (id: string) => void;
-  onDelete: (id: string) => void;
+  onEdit: (id: number) => void;
+  onDelete: (id: number) => void;
 }
 
 const Card: React.FC<CardProps> = ({ productlist, onEdit, onDelete }) => {

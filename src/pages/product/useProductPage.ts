@@ -1,16 +1,20 @@
 import { useContext, useEffect, useReducer, useState } from "react";
 import { productcontext } from "../../context/ProductContext";
-import { v4 as uuidv4 } from "uuid";
+
 interface ProductProps {
-  id: string;
+  id: number;
   name: string;
   price: string;
   category: string;
   stock: string;
   description: string;
+  createdAt?: string;
+  isActive?: boolean;
+  tags?: string[];
 }
+
 interface InitProps {
-  id: string;
+  id: number;
   name: string;
   price: string;
   category: string;
@@ -19,7 +23,7 @@ interface InitProps {
 }
 
 const initialState: InitProps = {
-  id: "",
+  id: 0,
   name: "",
   price: "",
   category: "",
@@ -33,7 +37,7 @@ type Action =
   | { type: "SetCategory"; payload: string }
   | { type: "SetDescription"; payload: string }
   | { type: "SetStock"; payload: string }
-  | { type: "SetAll"; payload: InitProps }
+  | { type: "SetAll"; payload: ProductProps }
   | { type: "Reset" };
 
 const reducer = (state: InitProps, action: Action): InitProps => {
@@ -49,7 +53,14 @@ const reducer = (state: InitProps, action: Action): InitProps => {
     case "SetStock":
       return { ...state, stock: action.payload };
     case "SetAll":
-      return { ...action.payload };
+      return {
+        id: action.payload.id,
+        name: action.payload.name,
+        price: action.payload.price,
+        category: action.payload.category,
+        stock: action.payload.stock,
+        description: action.payload.description,
+      };
     case "Reset":
       return initialState;
     default:
@@ -70,7 +81,7 @@ const useProductPage = () => {
   const [show, setShow] = useState<boolean>(false);
   const [search, setSearchLocal] = useState<string>("");
   const [view, setView] = useState<string>("table");
-  // header labels
+
   const headerlist = {
     name: "Name",
     price: "Price",
@@ -80,7 +91,6 @@ const useProductPage = () => {
     action: "Action",
   };
 
-  // validation
   const validate = () => {
     const temp: any = {};
     temp.name = state.name.trim() ? "" : "Name is required";
@@ -105,9 +115,17 @@ const useProductPage = () => {
     if (!validate()) return;
 
     if (state.id) {
-      contextApi.updateList({ ...state } as ProductProps);
+      contextApi.updateList(state);
     } else {
-      contextApi.add({ ...(state as ProductProps), id: uuidv4() });
+      const newProduct: ProductProps = {
+        ...state,
+        id: Date.now(),
+        createdAt: new Date().toISOString(),
+        isActive: true,
+        tags: [],
+      };
+
+      contextApi.add(newProduct);
     }
 
     dispatch({ type: "Reset" });
@@ -131,18 +149,19 @@ const useProductPage = () => {
     }, 500);
 
     return () => clearTimeout(t);
-  }, [search, contextApi.setSearch]);
+  }, [search]);
 
   const productlist = contextApi.filterList;
 
-  const handleEdit = (id: string) => {
+  const handleEdit = (id: number) => {
     const original = contextApi.productList.find((p) => p.id === id);
     if (!original) return;
-    dispatch({ type: "SetAll", payload: original as InitProps });
+
+    dispatch({ type: "SetAll", payload: original });
     setShow(true);
   };
 
-  const handleDelete = (id: string) => {
+  const handleDelete = (id: number) => {
     contextApi.deleteProduct(id);
   };
 
@@ -151,12 +170,9 @@ const useProductPage = () => {
     setShow(false);
   };
 
-  const handleTableView = () => {
-    setView("table");
-  };
-  const handleGridView = () => {
-    setView("grid");
-  };
+  const handleTableView = () => setView("table");
+  const handleGridView = () => setView("grid");
+
   return {
     state,
     errors,

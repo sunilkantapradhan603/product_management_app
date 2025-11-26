@@ -5,13 +5,16 @@ import React, {
   type PropsWithChildren,
 } from "react";
 
-interface ProductProps {
-  id: string;
+export interface ProductProps {
+  id: number;
   name: string;
   price: string;
   category: string;
   stock: string;
   description: string;
+  createdAt?: string;
+  isActive?: boolean;
+  tags?: string[];
 }
 
 interface ContextProps {
@@ -20,7 +23,7 @@ interface ContextProps {
   filterList: ProductProps[];
   setSearch: (search: string) => void;
   updateList: (product: ProductProps) => void;
-  deleteProduct: (id: string) => void;
+  deleteProduct: (id: number) => void;
 }
 
 export const productcontext = createContext<ContextProps>({
@@ -46,7 +49,7 @@ const ProductContext: React.FC<PropsWithChildren> = ({ children }) => {
     );
   };
 
-  const deleteProduct = (id: string) => {
+  const deleteProduct = (id: number) => {
     setProductList((prev) => prev.filter((p) => p.id !== id));
   };
 

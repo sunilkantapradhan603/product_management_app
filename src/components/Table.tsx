@@ -2,12 +2,15 @@ import { useState } from "react";
 import Button from "./Button";
 
 interface ProductListProps {
-  id: string;
+  id: number;
   name: string;
   price: string;
   category: string;
   stock: string;
   description: string;
+  createdAt?: string;
+  isActive?: boolean;
+  tags?: string[];
 }
 
 interface ProductHeaderProps {
@@ -22,8 +25,8 @@ interface ProductHeaderProps {
 interface TableProps {
   productlist: ProductListProps[];
   productheader: ProductHeaderProps;
-  onEdit: (id: string) => void;
-  onDelete: (id: string) => void;
+  onEdit: (id: number) => void;
+  onDelete: (id: number) => void;
 }
 
 const Table: React.FC<TableProps> = ({
