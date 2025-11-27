@@ -4,9 +4,9 @@ import Button from "./Button";
 interface ProductListProps {
   id: number;
   name: string;
-  price: string;
+  price: number;
   category: string;
-  stock: string;
+  stock: number;
   description: string;
   createdAt?: string;
   isActive?: boolean;
@@ -21,7 +21,7 @@ interface CardProps {
 
 const Card: React.FC<CardProps> = ({ productlist, onEdit, onDelete }) => {
   const [active, setActive] = useState<string>("");
-  const rowsPerPage = 4;
+  const rowsPerPage = 8;
   const [currentPage, setCurrentPage] = useState(1);
 
   const totalPages = Math.ceil(productlist.length / rowsPerPage);
@@ -45,7 +45,7 @@ const Card: React.FC<CardProps> = ({ productlist, onEdit, onDelete }) => {
         </div>
       ) : (
         <>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2">
             {currentCards.map((list) => (
               <div
                 key={list.id}
