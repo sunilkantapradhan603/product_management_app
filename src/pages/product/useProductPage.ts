@@ -4,9 +4,9 @@ import { productcontext } from "../../context/ProductContext";
 interface ProductProps {
   id: number;
   name: string;
-  price: string;
+  price: number;
   category: string;
-  stock: string;
+  stock: number;
   description: string;
   createdAt?: string;
   isActive?: boolean;
@@ -16,27 +16,27 @@ interface ProductProps {
 interface InitProps {
   id: number;
   name: string;
-  price: string;
+  price: number;
   category: string;
-  stock: string;
+  stock: number;
   description: string;
 }
 
 const initialState: InitProps = {
   id: 0,
   name: "",
-  price: "",
+  price: 0,
   category: "",
-  stock: "",
+  stock: 0,
   description: "",
 };
 
 type Action =
   | { type: "SetName"; payload: string }
-  | { type: "SetPrice"; payload: string }
+  | { type: "SetPrice"; payload: number }
   | { type: "SetCategory"; payload: string }
   | { type: "SetDescription"; payload: string }
-  | { type: "SetStock"; payload: string }
+  | { type: "SetStock"; payload: number }
   | { type: "SetAll"; payload: ProductProps }
   | { type: "Reset" };
 

@@ -4,13 +4,14 @@ import React, {
   useState,
   type PropsWithChildren,
 } from "react";
+import { products } from "../data/products";
 
 export interface ProductProps {
   id: number;
   name: string;
-  price: string;
+  price: number;
   category: string;
-  stock: string;
+  stock: number;
   description: string;
   createdAt?: string;
   isActive?: boolean;
@@ -36,7 +37,7 @@ export const productcontext = createContext<ContextProps>({
 });
 
 const ProductContext: React.FC<PropsWithChildren> = ({ children }) => {
-  const [productList, setProductList] = useState<ProductProps[]>([]);
+  const [productList, setProductList] = useState<ProductProps[]>(products);
   const [search, setSearch] = useState("");
 
   const add = (product: ProductProps) => {

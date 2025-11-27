@@ -4,9 +4,9 @@ import Button from "./Button";
 interface ProductListProps {
   id: number;
   name: string;
-  price: string;
+  price: number;
   category: string;
-  stock: string;
+  stock: number;
   description: string;
   createdAt?: string;
   isActive?: boolean;
@@ -36,7 +36,7 @@ const Table: React.FC<TableProps> = ({
   onDelete,
 }) => {
   const [active, setActive] = useState<string>("");
-  const rowsPerPage = 4;
+  const rowsPerPage = 8;
   const [currentPage, setCurrentPage] = useState(1);
 
   const totalPages = Math.ceil(productlist.length / rowsPerPage);
