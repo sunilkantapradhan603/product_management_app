@@ -34,6 +34,7 @@ button {
   font-size: 14px;
   font-weight: 500;
   padding: 7px;
+  border-radius: 10px;
 }
 form {
   padding: 10px;
