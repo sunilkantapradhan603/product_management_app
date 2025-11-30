@@ -16,27 +16,27 @@ interface ProductProps {
 interface InitProps {
   id: number;
   name: string;
-  price: number;
+  price: string;
   category: string;
-  stock: number;
+  stock: string;
   description: string;
 }
 
 const initialState: InitProps = {
   id: 0,
   name: "",
-  price: 0,
+  price: "",
   category: "",
-  stock: 0,
+  stock: "",
   description: "",
 };
 
 type Action =
   | { type: "SetName"; payload: string }
-  | { type: "SetPrice"; payload: number }
+  | { type: "SetPrice"; payload: string }
   | { type: "SetCategory"; payload: string }
   | { type: "SetDescription"; payload: string }
-  | { type: "SetStock"; payload: number }
+  | { type: "SetStock"; payload: string }
   | { type: "SetAll"; payload: ProductProps }
   | { type: "Reset" };
 
@@ -56,9 +56,9 @@ const reducer = (state: InitProps, action: Action): InitProps => {
       return {
         id: action.payload.id,
         name: action.payload.name,
-        price: action.payload.price,
+        price: action.payload.price.toString(),
         category: action.payload.category,
-        stock: action.payload.stock,
+        stock: action.payload.stock.toString(),
         description: action.payload.description,
       };
     case "Reset":
@@ -115,11 +115,17 @@ const useProductPage = () => {
     if (!validate()) return;
 
     if (state.id) {
-      contextApi.updateList(state);
+      contextApi.updateList({
+        ...state,
+        price: Number(state.price),
+        stock: Number(state.stock),
+      });
     } else {
       const newProduct: ProductProps = {
         ...state,
         id: Date.now(),
+        price: Number(state.price),
+        stock: Number(state.stock),
         createdAt: new Date().toISOString(),
         isActive: true,
         tags: [],

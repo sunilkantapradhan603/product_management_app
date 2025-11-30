@@ -72,7 +72,17 @@ const ProductPage = () => {
                     }
                   />
                 </div>
-
+                <div>
+                  <InputElement
+                    type="text"
+                    label="Stock"
+                    value={state.stock}
+                    msg={errors.stock}
+                    onChange={(e) =>
+                      dispatch({ type: "SetStock", payload: e.target.value })
+                    }
+                  />
+                </div>
                 <div>
                   <InputElement
                     type="textarea"
